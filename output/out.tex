@@ -1,0 +1,1344 @@
+%%
+% Copyright (c) 2017 - 2021, Pascal Wagler;
+% Copyright (c) 2014 - 2021, John MacFarlane
+%
+% All rights reserved.
+%
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions
+% are met:
+%
+% - Redistributions of source code must retain the above copyright
+% notice, this list of conditions and the following disclaimer.
+%
+% - Redistributions in binary form must reproduce the above copyright
+% notice, this list of conditions and the following disclaimer in the
+% documentation and/or other materials provided with the distribution.
+%
+% - Neither the name of John MacFarlane nor the names of other
+% contributors may be used to endorse or promote products derived
+% from this software without specific prior written permission.
+%
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+% "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+% FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+% COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+% INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+% BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+% CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+% LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+% ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+% POSSIBILITY OF SUCH DAMAGE.
+%%
+
+%%
+% This is the Eisvogel pandoc LaTeX template.
+%
+% For usage information and examples visit the official GitHub page:
+% https://github.com/Wandmalfarbe/pandoc-latex-template
+%%
+
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*,table}{xcolor}
+%
+\documentclass[
+  paper=a4,
+  ,captions=tableheading
+]{scrartcl}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{setspace}
+\setstretch{1.2}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\definecolor{default-linkcolor}{HTML}{A50000}
+\definecolor{default-filecolor}{HTML}{A50000}
+\definecolor{default-citecolor}{HTML}{4077C0}
+\definecolor{default-urlcolor}{HTML}{4077C0}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  breaklinks=true,
+  pdfcreator={LaTeX via pandoc with the Eisvogel template}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering,]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+
+% Workaround/bugfix from jannick0.
+% See https://github.com/jgm/pandoc/issues/4302#issuecomment-360669013)
+% or https://github.com/Wandmalfarbe/pandoc-latex-template/issues/2
+%
+% Redefine the verbatim environment 'Highlighting' to break long lines (with
+% the help of fvextra). Redefinition is necessary because it is unlikely that
+% pandoc includes fvextra in the default template.
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=\small,commandchars=\\\{\}}
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+% add backlinks to footnote references, cf. https://tex.stackexchange.com/questions/302266/make-footnote-clickable-both-ways
+\usepackage{footnotebackref}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+% Make use of float-package and set default placement for figures to H.
+% The option H means 'PUT IT HERE' (as  opposed to the standard h option which means 'You may put it here if you like').
+\usepackage{float}
+\floatplacement{figure}{H}
+
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+
+
+%%
+%% added
+%%
+
+%
+% language specification
+%
+% If no language is specified, use English as the default main document language.
+%
+
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,main=english]{babel}
+\else
+    % Workaround for bug in Polyglossia that breaks `\familydefault` when `\setmainlanguage` is used.
+  % See https://github.com/Wandmalfarbe/pandoc-latex-template/issues/8
+  % See https://github.com/reutenauer/polyglossia/issues/186
+  % See https://github.com/reutenauer/polyglossia/issues/127
+  \renewcommand*\familydefault{\sfdefault}
+    % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{english}
+\fi
+
+
+
+%
+% for the background color of the title page
+%
+
+%
+% break urls
+%
+\PassOptionsToPackage{hyphens}{url}
+
+%
+% When using babel or polyglossia with biblatex, loading csquotes is recommended
+% to ensure that quoted texts are typeset according to the rules of your main language.
+%
+\usepackage{csquotes}
+
+%
+% captions
+%
+\definecolor{caption-color}{HTML}{777777}
+\usepackage[font={stretch=1.2}, textfont={color=caption-color}, position=top, skip=4mm, labelfont=bf, singlelinecheck=false, justification=raggedright]{caption}
+\setcapindent{0em}
+
+%
+% blockquote
+%
+\definecolor{blockquote-border}{RGB}{221,221,221}
+\definecolor{blockquote-text}{RGB}{119,119,119}
+\usepackage{mdframed}
+\newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
+\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+
+%
+% Source Sans Pro as the de­fault font fam­ily
+% Source Code Pro for monospace text
+%
+% 'default' option sets the default
+% font family to Source Sans Pro, not \sfdefault.
+%
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+    \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+  \else % if not pdftex
+    \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+
+  % XeLaTeX specific adjustments for straight quotes: https://tex.stackexchange.com/a/354887
+  % This issue is already fixed (see https://github.com/silkeh/latex-sourcecodepro/pull/5) but the
+  % fix is still unreleased.
+  % TODO: Remove this workaround when the new version of sourcecodepro is released on CTAN.
+  \ifxetex
+    \makeatletter
+    \defaultfontfeatures[\ttfamily]
+      { Numbers   = \sourcecodepro@figurestyle,
+        Scale     = \SourceCodePro@scale,
+        Extension = .otf }
+    \setmonofont
+      [ UprightFont    = *-\sourcecodepro@regstyle,
+        ItalicFont     = *-\sourcecodepro@regstyle It,
+        BoldFont       = *-\sourcecodepro@boldstyle,
+        BoldItalicFont = *-\sourcecodepro@boldstyle It ]
+      {SourceCodePro}
+    \makeatother
+  \fi
+  \fi
+
+%
+% heading color
+%
+\definecolor{heading-color}{RGB}{40,40,40}
+\addtokomafont{section}{\color{heading-color}}
+% When using the classes report, scrreprt, book,
+% scrbook or memoir, uncomment the following line.
+%\addtokomafont{chapter}{\color{heading-color}}
+
+%
+% variables for title, author and date
+%
+\usepackage{titling}
+\title{}
+\author{}
+\date{}
+
+%
+% tables
+%
+
+\definecolor{table-row-color}{HTML}{F5F5F5}
+\definecolor{table-rule-color}{HTML}{999999}
+
+%\arrayrulecolor{black!40}
+\arrayrulecolor{table-rule-color}     % color of \toprule, \midrule, \bottomrule
+\setlength\heavyrulewidth{0.3ex}      % thickness of \toprule, \bottomrule
+\renewcommand{\arraystretch}{1.3}     % spacing (padding)
+
+
+%
+% remove paragraph indention
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+%
+%
+% Listings
+%
+%
+
+
+%
+% header and footer
+%
+\usepackage{fancyhdr}
+
+\fancypagestyle{eisvogel-header-footer}{
+  \fancyhead{}
+  \fancyfoot{}
+  \lhead[]{}
+  \chead[]{}
+  \rhead[]{}
+  \lfoot[\thepage]{}
+  \cfoot[]{}
+  \rfoot[]{\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0.4pt}
+}
+\pagestyle{eisvogel-header-footer}
+
+%%
+%% end added
+%%
+
+\begin{document}
+
+%%
+%% begin titlepage
+%%
+
+%%
+%% end titlepage
+%%
+
+
+
+\hypertarget{intro-java-languange}{%
+\section{Intro: Java Languange}\label{intro-java-languange}}
+
+10-3 蒋韵涵Ana
+
+\hypertarget{java-program-template}{%
+\subsection{- Java Program Template}\label{java-program-template}}
+
+\hypertarget{class}{%
+\subsubsection{Class:}\label{class}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{//template}
+\NormalTok{[}\KeywordTok{public}\NormalTok{/}\KeywordTok{private}\NormalTok{] + }\KeywordTok{class}\NormalTok{ + [Classname]\{ }
+
+\NormalTok{\}}
+
+\CommentTok{//Eg}
+\KeywordTok{public} \KeywordTok{class}\NormalTok{ Kumo\{}
+    \CommentTok{/*Code*/}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+~~~~~~~~\emph{Classname 开头字母建议大写}
+
+\hypertarget{method}{%
+\subsubsection{Method}\label{method}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{//template}
+\NormalTok{[}\KeywordTok{public}\NormalTok{/}\KeywordTok{private}\NormalTok{] + [}\DataTypeTok{static}\NormalTok{/}\KeywordTok{null}\NormalTok{] + [}\DataTypeTok{int}\NormalTok{/}\DataTypeTok{void}\NormalTok{/etc.(ReturnType)] }
+\NormalTok{    + [Methodname] + (parameter list) + \{}
+
+\NormalTok{ \}}
+
+\CommentTok{//Eg.}
+\KeywordTok{public} \DataTypeTok{static} \DataTypeTok{void} \FunctionTok{Kumo}\NormalTok{(}\BuiltInTok{String}\NormalTok{ csa, }\DataTypeTok{double}\NormalTok{ ap)\{}
+
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{access specifier}: public/private,
+  决定是否能在其他class(client class)中直接使用此method
+\item
+  \textbf{static}: 添加与否决定method是属于Object还是整个Class(static or
+  instance)
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    不写static就是instance
+  \item
+    Eg1. private int a = 0;
+
+    \begin{itemize}
+    \item
+      private对应access specifier - 代表这个int无法在其他class直接使用
+    \item
+      没有写static就代表是instance
+    \item
+      所以a是一个private instance
+    \end{itemize}
+  \item
+    ~Eg2. 创建一个Class Car
+
+    \begin{itemize}
+    \item
+      在Car class中，change\_price() 就会是instance method，
+      因为每个车子价格都会不一样,
+      所以我们在改价格时也是改每个object(每个车)各自的价格，因而method不属于整个Car
+      Class
+    \item
+      但是如果你很牛，你要改变世界，比如把世界上所有汽车都改成八个轮子的，那么此时change\_wheels()就是static
+      method，因为这个改变是会改变所有属于Car类型的东西
+    \item
+      （详见后面Class\&Object部分）
+    \end{itemize}
+  \end{enumerate}
+\item
+  \textbf{ReturnType}: 返回类型，primitive type/object,
+  void就不返回（可以理解为只是做了一个动作）
+\item
+  \textbf{parameter}: take-in
+\end{enumerate}
+
+\hypertarget{constructor}{%
+\subsubsection{Constructor}\label{constructor}}
+
+\begin{itemize}
+\tightlist
+\item
+  创建一个属于Class的object
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{//template}
+\KeywordTok{public}\NormalTok{ [Classname]\{}
+
+\NormalTok{\}}
+
+\CommentTok{//Eg.}
+\KeywordTok{public}\NormalTok{ BankAccount\{}
+    \CommentTok{/* Code */}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+~~~~~~~~\emph{创建了一个BankAccount}的object
+
+\hypertarget{main-method}{%
+\subsubsection{Main Method}\label{main-method}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{public} \DataTypeTok{static} \DataTypeTok{void} \FunctionTok{main}\NormalTok{(}\BuiltInTok{String}\NormalTok{[] args)\{}
+    \CommentTok{/* Code */}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{error-exception}{%
+\subsection{- Error \& Exception}\label{error-exception}}
+
+\hypertarget{compile-time-error-syntax-error}{%
+\subsubsection{Compile-Time Error / Syntax
+Error}\label{compile-time-error-syntax-error}}
+
+Sth is wrong according to the rules of language and the compiler finds
+it.
+
+Eg. \textbf{s}ystem.out.print(\enquote{a}); --\textgreater{}
+\textbf{S}ystem.out.print(\enquote{a});
+
+\hypertarget{run-time-exception}{%
+\subsubsection{Run-Time Exception}\label{run-time-exception}}
+
+Errors detected by the program during execution, which causes th
+eprogram to terminate before finishing execution
+
+Eg.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+Exception & Example/Meaning\tabularnewline
+\midrule
+\endhead
+ArthemeticException & division by 0\tabularnewline
+NullPointerException & method call for an object whose value is
+null\tabularnewline
+ArrayIndexOutOfBoundsException & int{[}{]} kumo = \{1,2,3\};~int wrong =
+a{[}4{]};\tabularnewline
+IndexOutOfBoundsException & 和上面同理\tabularnewline
+StringIndexOutOfBoundsException & 和上面同理\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{logic-error}{%
+\subsubsection{Logic Error}\label{logic-error}}
+
+Error that causes the program to produce an unexpected output
+
+\emph{不影响程序正常运行}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{output}{%
+\subsection{- Output}\label{output}}
+
+\begin{itemize}
+\item
+  System.out.\textbf{print}() \& \textbf{println}()
+\item
+  Use ~in front of signs to include signs into the Strng literal - for
+  signs that are specific(eg. " ") .
+
+  \begin{itemize}
+  \item
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{//Eg.}
+
+\BuiltInTok{System}\NormalTok{.}\FunctionTok{out}\NormalTok{.}\FunctionTok{print}\NormalTok{(}\StringTok{"Kumo is }\SpecialCharTok{\textbackslash{}"}\StringTok{happy}\SpecialCharTok{\textbackslash{}"}\StringTok{. "}\NormalTok{)}
+\CommentTok{//Output: Kumo is "happy".}
+\end{Highlighting}
+\end{Shaded}
+  \end{itemize}
+\item
+  Escape Sequence
+\item
+\item
+  Comment
+
+  \begin{itemize}
+  \item
+    // ： for a single current line
+  \item
+    /\emph{\ldots{} }/ : multi-lines
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{built-inprimitive-types}{%
+\subsection{- Built-in(Primitive Types)}\label{built-inprimitive-types}}
+
+Start with a \textbf{lower case} letter
+
+\hypertarget{types}{%
+\subsubsection{Types}\label{types}}
+
+\begin{itemize}
+\item
+  int: -2\^{}31 \textasciitilde{} 2\^{}31-1
+\item
+  double
+\item
+  boolean
+\end{itemize}
+
+\hypertarget{ux5f3aux8f6c}{%
+\subsubsection{强转}\label{ux5f3aux8f6c}}
+
+\begin{itemize}
+\item
+\begin{verbatim}
+//Eg.
+
+int a = 1;
+double b = (double)a; 
+
+// (type) variable
+\end{verbatim}
+\end{itemize}
+
+\hypertarget{storage}{%
+\subsubsection{Storage}\label{storage}}
+
+\begin{itemize}
+\item
+  1 byte = 8 bits
+\item
+  int : 4 bytes
+\item
+  double: 8 bytes
+\item
+  boolean: 1 bit
+\item
+  \emph{注意Overflow - result out of range}， 因为有storage限制 -
+  属于Logic Error
+\end{itemize}
+
+\hypertarget{binary-number}{%
+\subsubsection{Binary Number}\label{binary-number}}
+
+MSB: the sign of the binary number - 1(negative), 0(positive)
+
+\begin{itemize}
+\item
+  \textbf{2's complement representation}
+
+  \begin{itemize}
+  \item
+    negative - 1 as the sign
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{variableconstants}{%
+\subsection{- Variable\&Constants}\label{variableconstants}}
+
+\hypertarget{identifier}{%
+\subsubsection{Identifier}\label{identifier}}
+
+\emph{cannot be a keyword, eg. double double = 2.3}
+
+\hypertarget{variable}{%
+\subsubsection{Variable}\label{variable}}
+
+Must be declared and initialized before using it
+
+Can be changed
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{//Eg.}
+\DataTypeTok{int}\NormalTok{ a=b=}\DecValTok{1}\NormalTok{;}
+\NormalTok{a=}\DecValTok{2}\NormalTok{;}
+\CommentTok{//最终：a=2, b=1 }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{constants}{%
+\subsubsection{Constants}\label{constants}}
+
+Constant name is all \textbf{CAPITLIZED}
+
+Use the keyword \textbf{final}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{//Eg. }
+\DataTypeTok{final} \DataTypeTok{double}\NormalTok{ PI = }\FloatTok{3.14}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{expression}{%
+\subsection{- Expression}\label{expression}}
+
+\hypertarget{types-1}{%
+\subsubsection{Types}\label{types-1}}
+
+\hypertarget{arthemetic-expression}{%
+\subsubsection{Arthemetic Expression}\label{arthemetic-expression}}
+
+\emph{For an operation involving a double and int, int is promoted to a
+double}
+
+Eg. double a = 3.5 + 2;
+
+\hypertarget{truncation---intint}{%
+\subparagraph{Truncation - int/int}\label{truncation---intint}}
+
+\hypertarget{string-concatenation}{%
+\paragraph{String Concatenation}\label{string-concatenation}}
+
+\hypertarget{relational-operators}{%
+\subsubsection{Relational Operators}\label{relational-operators}}
+
+\emph{- Only for primitive Types!}
+
+Eg. String(object) are compared using equals() \& compareTo()
+
+\emph{- Do not use == to test for equality of floating-point numbers!
+since they cannot always be represented exactly in the computer memory.}
+
+Eg. 4.4\%3 \textgreater{}\textgreater{}\textgreater{} 1.400000000000004
+
+\hypertarget{compound-assignment-operators}{%
+\subsubsection{Compound Assignment
+Operators}\label{compound-assignment-operators}}
+
+\hypertarget{increment-and-decrement-operators}{%
+\subsubsection{Increment and DEcrement
+Operators}\label{increment-and-decrement-operators}}
+
+\emph{Difference between i++ and ++i}
+
+\hypertarget{logical-operators}{%
+\subsubsection{Logical Operators}\label{logical-operators}}
+
+\hypertarget{priority---important}{%
+\subsection{\texorpdfstring{\emph{PRIORITY -
+IMPORTANT}}{PRIORITY - IMPORTANT}}\label{priority---important}}
+
+\hypertarget{short-circuit}{%
+\subsubsection{Short Circuit}\label{short-circuit}}
+
+\begin{itemize}
+\item
+  A\&\&B
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A为false, B不运行
+  \end{itemize}
+\item
+  A\textbar{}\textbar{}B
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A为true, B不运行
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{de-morgans-law}{%
+\subsection{- De Morgan's Law}\label{de-morgans-law}}
+
+\begin{itemize}
+\item
+  \textbf{! ( A\&\&B ) = !A \textbar{}\textbar{} !B}
+\item
+  \textbf{! (A \textbar{}\textbar{} B) = !A \&\& !B}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{decision-making-control-structures}{%
+\subsection{- Decision-Making Control
+Structures}\label{decision-making-control-structures}}
+
+\hypertarget{if-statements}{%
+\subsubsection{If Statements}\label{if-statements}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{if}\NormalTok{(expression) }\CommentTok{// expression must have a boolean value}
+\NormalTok{\{}
+\NormalTok{    Statement1; }\CommentTok{//executed only when expression is true}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{if-else-statements}{%
+\subsection{If-else Statements}\label{if-else-statements}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{if}\NormalTok{(expression)}
+\NormalTok{\{}
+\NormalTok{    Statement1;}
+\NormalTok{\}}
+\KeywordTok{else} \KeywordTok{if}\NormalTok{(expression)}
+\NormalTok{\{}
+\NormalTok{    Statement2;}
+\NormalTok{\}}
+\KeywordTok{else}
+\NormalTok{\{}
+\NormalTok{    Statement3;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{if后可以不加大括号\{\},但只能控制 if后一行的代码}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DataTypeTok{int}\NormalTok{ a = }\DecValTok{0}\NormalTok{;}
+\KeywordTok{if}\NormalTok{(a==}\DecValTok{1}\NormalTok{)}
+\NormalTok{    System.}\FunctionTok{out}\NormalTok{.}\FunctionTok{print}\NormalTok{(}\DecValTok{1}\NormalTok{); }\CommentTok{// S1}
+\NormalTok{    System.}\FunctionTok{out}\NormalTok{.}\FunctionTok{print}\NormalTok{(}\DecValTok{2}\NormalTok{); }\CommentTok{// S2}
+\CommentTok{//Output: 2}
+\CommentTok{//因为无法进入if statement，S1无法运行；}
+\CommentTok{//但S2不属于if statement,所以正常运行}
+
+\KeywordTok{if}\NormalTok{(a==}\DecValTok{0}\NormalTok{)\{}
+\NormalTok{    System.}\FunctionTok{out}\NormalTok{.}\FunctionTok{print}\NormalTok{(}\DecValTok{1}\NormalTok{);}
+\NormalTok{    System.}\FunctionTok{out}\NormalTok{.}\FunctionTok{print}\NormalTok{(}\DecValTok{2}\NormalTok{);}
+\NormalTok{\}}
+\CommentTok{//Output: 12}
+\end{Highlighting}
+\end{Shaded}
+
+Lesson 10-12
+
+Justin 10-6
+
+\hypertarget{lesson-10}{%
+\subsection{Lesson 10}\label{lesson-10}}
+
+\hypertarget{the-basic-introduction-of-object-oriented-programming}{%
+\subsubsection{the basic introduction of object-oriented
+programming}\label{the-basic-introduction-of-object-oriented-programming}}
+
+Object-oriented programming.
+
+Model real-word entities as objects of a \enquote{genreal} class
+
+a class can be though of as a document that describes the properties or
+functionalities objects/instances of that class
+
+\hypertarget{what-are-the-components-of-a-class}{%
+\subsubsection{what are the components of a
+class}\label{what-are-the-components-of-a-class}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  class header
+\item
+  instance and static variables- represent properties.
+\item
+  constructors
+\item
+  methods
+\end{enumerate}
+
+\hypertarget{writing-class-public-capital-the-first-letter-in-the-name-of-the-class.}{%
+\subparagraph{writing class: public, capital the first letter in the
+name of the
+class.}\label{writing-class-public-capital-the-first-letter-in-the-name-of-the-class.}}
+
+for example
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{public} \KeywordTok{class}\NormalTok{ BankAccount\{}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{instance-variables}{%
+\subsubsection{Instance variables}\label{instance-variables}}
+
+represent properties any of instance of the class.
+
+Instance msut be declared as private.
+
+Not initialized, not final
+
+Examples
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{public} \KeywordTok{class}\NormalTok{ BankAccount\{}
+    \CommentTok{//instance variables:}
+    \KeywordTok{private} \BuiltInTok{String}\NormalTok{ password;}
+    \KeywordTok{private} \DataTypeTok{double}\NormalTok{ balance;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{static-variables}{%
+\subsubsection{Static variables:}\label{static-variables}}
+
+represent properties to the entire class
+
+have the same value for all instances of the class
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Public }\KeywordTok{class}\NormalTok{ BankAccount\{}
+    \CommentTok{//static variables}
+\NormalTok{    public }\DataTypeTok{static} \DataTypeTok{final} \DataTypeTok{double}\NormalTok{ overdrawn-limit=}\FloatTok{0.0}\NormalTok{;}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{public-and-private-modifiers}{%
+\subsubsection{public and private
+modifiers}\label{public-and-private-modifiers}}
+
+private: visibile within the scope of class
+
+public: can be access with outside the class
+
+\hypertarget{constructor-1}{%
+\subsubsection{constructor}\label{constructor-1}}
+
+initialize instance variables when object is being created during
+runtime
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Public }\KeywordTok{class}\NormalTok{ BankAccount\{}
+    \CommentTok{// instance variable}
+    \KeywordTok{private} \BuiltInTok{String}\NormalTok{ password;}
+\NormalTok{    ptivate }\DataTypeTok{double}\NormalTok{ balance;}
+
+    \CommentTok{//zero-parameter constructor}
+    \KeywordTok{public} \FunctionTok{BankAccount}\NormalTok{()\{\}}
+    \CommentTok{//the same with password="", balance=0.0;}
+    \KeywordTok{public} \FunctionTok{BackAccount}\NormalTok{(}\BuiltInTok{String}\NormalTok{ password, }\DataTypeTok{double}\NormalTok{ balance)}
+\NormalTok{    \{}
+        \KeywordTok{this}\NormalTok{.}\FunctionTok{password}\NormalTok{=password;}
+        \KeywordTok{this}\NormalTok{.}\FunctionTok{balance}\NormalTok{=balance;}
+\NormalTok{    \}}
+    \CommentTok{//this. refers to the line 3 and line 4, it means this variable is the class instance objects}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Syntanx: public className(\ldots{})\{\ldots{}\}
+
+When no constructor is written, Java provides a default zero-parameter
+
+\hypertarget{this.}{%
+\subsubsection{This.}\label{this.}}
+
+This. is use for the class instance variable. Its use is to avoid the
+same name with the local variable.(However, you can still use another
+name for local variable)
+
+\hypertarget{create-object-in-runtime}{%
+\subsubsection{Create object in
+runtime}\label{create-object-in-runtime}}
+
+put the main method in a runner class
+
+create object using the new keyword followed by the constructor call
+
+Syntax: className variableName=new className(parameters)
+
+example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{public} \KeywordTok{class}\NormalTok{ BankAccountRunner\{}
+    \KeywordTok{public} \DataTypeTok{static} \DataTypeTok{void} \FunctionTok{main}\NormalTok{(}\BuiltInTok{String}\NormalTok{[] args)}
+\NormalTok{    \{}
+        \CommentTok{//Create a BankAccount object(call constructor)}
+\NormalTok{        BackAccount a = }\KeywordTok{new} \FunctionTok{BankAccount}\NormalTok{(}\StringTok{"123456"}\NormalTok{,}\DecValTok{0}\NormalTok{);}
+\NormalTok{        BankAccount b = }\KeywordTok{new} \FunctionTok{BankAccount}\NormalTok{();}
+        \CommentTok{//use difference constructors}
+\NormalTok{    \} }
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+a and b are object reference variables, which are storing addfress of
+the actual objects
+
+\hypertarget{methods}{%
+\subsubsection{Methods}\label{methods}}
+
+Accessor(get) method
+
+mutator(set) method
+
+Syntax
+
+public returntype methodname(type param1\ldots{}..)\{
+
+~~~~\ldots{}.
+
+\}
+
+When returnType is not void, there must be a return statement, which
+returns the value of the type
+
+When it is void, there is no return statement
+
+examples of accessor and mutator
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{public} \KeywordTok{class}\NormalTok{ BankAccount\{}
+    \CommentTok{//accessor}
+    \KeywordTok{public} \DataTypeTok{double} \FunctionTok{getBalance}\NormalTok{()\{}
+    \KeywordTok{return}\NormalTok{ balance;}
+\NormalTok{    \}}
+    \CommentTok{//mutator}
+    \KeywordTok{public} \DataTypeTok{void} \FunctionTok{deposit}\NormalTok{(}\DataTypeTok{double}\NormalTok{ amount)\{}
+\NormalTok{        balance += amount;}
+\NormalTok{    \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{encapsulation}{%
+\subsubsection{encapsulation}\label{encapsulation}}
+
+the property of the object is private, so there is an implementation:
+private instance variables + public methods. It can take the instance
+objects outside of the class
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{public} \KeywordTok{class}\NormalTok{ BankAccount\{}
+\NormalTok{    private }\DataTypeTok{double}\NormalTok{ balance;}
+    \KeywordTok{public} \DataTypeTok{double} \FunctionTok{getBalance}\NormalTok{()\{}
+    \KeywordTok{return}\NormalTok{ balance;}
+\NormalTok{    \}}
+    \CommentTok{//since balance is private, we cannot use it outside the class. The method helps us to get the value of balance}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{invoking-instance-methods-in-client-class}{%
+\subsubsection{invoking instance methods in client
+class}\label{invoking-instance-methods-in-client-class}}
+
+syntax: variableName.methodName(param1\ldots{})
+
+variable name must have already stored the address of an object.
+
+\hypertarget{static-method}{%
+\subsection{static method:}\label{static-method}}
+
+static methods are methods belonging to the class
+
+Instance variables are not allowed to be accessed
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{public} \DataTypeTok{static} \DataTypeTok{void} \FunctionTok{main}\NormalTok{(}\BuiltInTok{String}\NormalTok{[] args)\{...\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{lesson-11}{%
+\section{lesson 11}\label{lesson-11}}
+
+\hypertarget{instance-method-invocation}{%
+\subsubsection{instance method
+invocation}\label{instance-method-invocation}}
+
+call the method directly within other instance methods in the same class
+
+equivalent to using this.
+
+example
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{public} \KeywordTok{class}\NormalTok{ BankAccount\{}
+    \KeywordTok{public} \DataTypeTok{double} \FunctionTok{getBalance}\NormalTok{()\{}
+\NormalTok{        return balance;}
+\NormalTok{    \}}
+\NormalTok{    public }\DataTypeTok{double} \FunctionTok{deposit}\NormalTok{(}\DataTypeTok{double}\NormalTok{ amount)}
+\NormalTok{    \{}
+\NormalTok{        double newAmount=}\FunctionTok{getBalance}\NormalTok{()+amount;}
+\NormalTok{        return newAmount;}
+\NormalTok{    \}}
+    \CommentTok{//remember the parentheses}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+outside: use objectRefernce. MethodName(\ldots{})
+
+\hypertarget{static-method-invocation}{%
+\subsubsection{Static method
+invocation}\label{static-method-invocation}}
+
+use the static method directly inside all method
+
+equivalent to using className.methodName(\ldots{})
+
+use className.methodName
+
+for example
+
+\begin{verbatim}
+public class BankAccount{
+    public static void printlimit()
+    {
+        System.out.print(Overdeawn-LIMIT)
+    }
+}
+public class BankAccountrunner{
+    BankAccount,printlimit;
+    BackAccount a=new BankAccount();
+    a.printlimit();
+}
+\end{verbatim}
+
+Other examples: Math classes
+
+a\^{}b: Math.pow(a,b)
+
+the square root of a: Math.sqrt(a)
+
+absolute value of a: Math.abs(a)
+
+Math.random(): give a random number bewteen 0 and 1( not containing 1)
+
+examples:
+
+find a random integer 0 and 100
+
+int result=(int)(101*Math.random()). Because it does not include 1, so
+we need to use 101
+
+\hypertarget{tostring}{%
+\subsubsection{tostring}\label{tostring}}
+
+when an object reference variable is printed
+
+If doesn't store anything: NullPointerException
+
+When the reference variables stores the address of the object:
+toString()method is invoked, which returns a String.
+
+example
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{public} \KeywordTok{class}\NormalTok{ BankAccount\{}
+    \KeywordTok{public} \BuiltInTok{String} \FunctionTok{toString}\NormalTok{()}
+\NormalTok{    \{}
+\NormalTok{        return }\StringTok{"A"}\NormalTok{;}
+\NormalTok{    \}}
+\NormalTok{\}}
+\KeywordTok{public} \KeywordTok{class}\NormalTok{ Runner\{}
+\NormalTok{    BankAccount bob;}
+\NormalTok{    bob=}\KeywordTok{new} \FunctionTok{BankAccount}\NormalTok{(...);}
+\NormalTok{    System.}\FunctionTok{out}\NormalTok{.}\FunctionTok{print}\NormalTok{(bob);}
+    \CommentTok{//the same with bob.toString()}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{parameter-passing-during-the-method-invocation}{%
+\subsubsection{Parameter passing during the method
+invocation}\label{parameter-passing-during-the-method-invocation}}
+
+we can pass primitive type or variables storing a value
+
+\hypertarget{object-reference-type}{%
+\subsubsection{object reference type}\label{object-reference-type}}
+
+use a copy of the address
+
+\hypertarget{method-overload}{%
+\subsubsection{Method overload}\label{method-overload}}
+
+more than one method with the same names, but different parameters.
+
+\begin{itemize}
+\item
+  same method name, different number of parameters.
+\item
+  different number of parameters
+\item
+  different types of parameters
+\item
+  parameters listed in different orders
+\item
+  be careful to distinguish the parameters type
+\end{itemize}
+
+\hypertarget{wrapper-classes}{%
+\subsubsection{Wrapper classes}\label{wrapper-classes}}
+
+Classes/objects corresponds to primitive types.
+
+Convenient
+
+Convert primitive type variable initialization to object type variable
+initialization
+
+example
+
+int a1=40;
+
+Integer a2= new Integer(40); capitalize
+
+double b1=3.14;
+
+Double b2= new Double(3.14);
+
+System.out.print(a2.intValue());
+
+System.out.print(b2.doubleValue());
+
+\hypertarget{autoboxing}{%
+\subsubsection{Autoboxing}\label{autoboxing}}
+
+allowed to directly assign a primitive type value to the correspoding
+wrapper class.
+
+int a=1;
+
+Integer x=a; (equals to new Integer(1))
+
+Double x=(int value) not allowed. It will not do autoboxing and change
+of the double and int value at the same time
+
+\hypertarget{autoboxing-1}{%
+\subsubsection{Autoboxing:}\label{autoboxing-1}}
+
+Integer x=new Integer(2);
+
+assign a object refernce to its corresponding primitive type variable.
+
+int a=x;
+
+a=2
+
+Wrapper classes are immutable
+
+Integer a1=1;
+
+a1=2;
+
+there are two objects
+
+\hypertarget{lesson-12}{%
+\section{Lesson 12}\label{lesson-12}}
+
+String is an object type.
+
+Syntax: variableName=new String(String literal);
+
+variable Name=String literal;
+
+The first one creates a new object. The second one means it is in the
+String Constant pool
+
+\hypertarget{string-initialization-1}{%
+\subsubsection{String initialization 1}\label{string-initialization-1}}
+
+zero parameter: new String()
+
+one-parameter:new String("")
+
+If you uses this type of initialization, it creates new objects.
+
+String a=new String(\enquote{c});
+
+String b=new String(\enquote{c});
+
+There are two objects.
+
+\hypertarget{string-initialization-2}{%
+\subsubsection{String initialization 2}\label{string-initialization-2}}
+
+String a=\enquote{a};
+
+String b=\enquote{a};
+
+This will only creates one object because they both refer to \enquote{a}
+in the String constant pool
+
+\hypertarget{operator}{%
+\subsubsection{\texorpdfstring{\enquote{==}
+operator}{``=='' operator}}\label{operator}}
+
+== compares the contents.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{String}\NormalTok{ a=}\StringTok{"c"}\NormalTok{;}
+\BuiltInTok{System}\NormalTok{.}\FunctionTok{out}\NormalTok{.}\FunctionTok{print}\NormalTok{(a==}\StringTok{"c"}\NormalTok{);}
+\NormalTok{Output:}\KeywordTok{true}
+\end{Highlighting}
+\end{Shaded}
+
+the content of a and the address of \enquote{c}
+
+Another example:
+
+String a=new String(\enquote{c});
+
+String b=new String(\enquote{c});
+
+System.out.print(a==b);
+
+They have difference address, so it will output: false.
+
+\hypertarget{equals-methodboolean}{%
+\subsubsection{Equals method(boolean)}\label{equals-methodboolean}}
+
+String a=new String(\enquote{c});
+
+String b=new String(\enquote{c});
+
+System.out.print(a.equals(b));
+
+Compare the values, which is the same.
+
+\hypertarget{length-methodint}{%
+\subsubsection{Length method(int)}\label{length-methodint}}
+
+Calculate the length of the string
+
+\hypertarget{substring-methodstring}{%
+\subsubsection{substring method(string)}\label{substring-methodstring}}
+
+one parameter: (int begin index)
+
+\hypertarget{remember-that-the-first-index-is-0.}{%
+\subparagraph{remember that the first index is
+0.}\label{remember-that-the-first-index-is-0.}}
+
+The substring will be the part from the begin index to the end.
+
+two parameter: (int begin index, int end index)
+
+The substring will be the part from the begin index to the end index.
+
+\hypertarget{indexof-methodint}{%
+\subsubsection{indexOf method(int)}\label{indexof-methodint}}
+
+find out the first substring which appears in the string. It willreturn
+the first letter's index
+
+\hypertarget{comparetostring}{%
+\subsubsection{Compareto(string)}\label{comparetostring}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  if two string are identical, return 0
+\item
+  if the first string is longer than the second one, and the content of
+  the first few letters of the first string and the second one is the
+  same, it will return how many units A more than B
+\item
+  If there is different letters, just make a calculations according to
+  the ASCII table
+\end{enumerate}
+
+\end{document}
